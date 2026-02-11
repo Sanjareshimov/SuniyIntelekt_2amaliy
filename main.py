@@ -2,27 +2,28 @@ import pandas as pd
 import numpy as np
 
 # 1. CSV faylni yuklash
-df = pd.read_csv("10.csv")
+df = pd.read_csv("4.csv")
 
+# 2. Jadval ustunlarini chiqarish
 print("📌 Jadval ustunlari:")
 print(df.columns)
 
-# 2. Takroriy qatorlarni olib tashlash (console uchun)
+# 3. Takroriy qatorlarni olib tashlash (faqat ishlash jarayonida)
 clean_df = df.drop_duplicates()
 
-print("\n📌 Takroriy qatorlar olib tashlangandan keyingi ma'lumotlar:")
+print("\n📌 Tozalangan ma'lumotlar (takroriylar olib tashlandi):")
 print(clean_df)
 
-# 3. GroupBy (masalan Level bo‘yicha)
-grouped = clean_df.groupby("Level")
+# 4. GroupBy (masalan Subject bo‘yicha)
+grouped = clean_df.groupby("Subject")
 
-# 4. Sonli ustunlarning o‘rtacha qiymatlari
-mean_values = grouped[["Weight", "Amount"]].mean()
+# 5. Sonli ustun (Data_value) o‘rtacha qiymati
+mean_values = grouped["Data_value"].mean()
 
-print("\n📊 GroupBy(Level) bo‘yicha o‘rtacha qiymatlar:")
+print("\n📊 Subject bo‘yicha Data_value o‘rtacha qiymatlari:")
 print(mean_values)
 
-# 5. Tozalangan ma’lumotni yangi CSV faylga saqlash
-clean_df.to_csv("10_cleaned.csv", index=False)
+# 6. Tozalangan ma’lumotni yangi CSV faylga saqlash
+clean_df.to_csv("file2_cleaned.csv", index=False)
 
-print("\n✅ Tozalangan fayl '10_cleaned.csv' nomi bilan saqlandi")
+print("\n✅ Tozalangan fayl 'file2_cleaned.csv' nomi bilan saqlandi")
